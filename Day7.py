@@ -1,5 +1,3 @@
-import math
-
 puz = [int(x) for x in open("./puzzles/day7_final").readline().split(",")]
 crabs = [{"crabID": crab, "horz": crab} for crab in puz]
 
