@@ -7,23 +7,18 @@ def calculateFuelCosts(crabs, pos):
 
 
 # part two
-def gauss(n, start, end):
-    return round((n / 2) * (start + end))
+def gauss(start, n):
+    return round((n / 2) * (start + n))
 
 
 def calculateBurningFuelCosts(crabs, pos):
-    return sum(
-        [gauss(abs(crab["horz"] - pos), 1, abs(crab["horz"] - pos)) for crab in crabs]
-    )
+    return sum([gauss(1, abs(crab["horz"] - pos)) for crab in crabs])
+
+
+def getPosWithMinFulCost(fuelCostFunc):
+    return min([fuelCostFunc(crabs, pos) for pos in range(min(puz), max(puz) + 1)])
 
 
 # print results
-possiblePos = min(
-    [calculateFuelCosts(crabs, pos) for pos in range(min(puz), max(puz) + 1)]
-)
-print("Part1:", possiblePos)
-
-possiblePos2 = min(
-    [calculateBurningFuelCosts(crabs, pos) for pos in range(min(puz), max(puz) + 1)]
-)
-print("Part2:", possiblePos2)
+print("Part1:", getPosWithMinFulCost(calculateFuelCosts))
+print("Part2:", getPosWithMinFulCost(calculateBurningFuelCosts))
